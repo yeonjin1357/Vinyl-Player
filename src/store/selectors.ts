@@ -26,3 +26,5 @@ export const selectUpNext = (s: PlayerState): Track[] =>
 /** Progress fraction 0..1, guarded against zero/over-run. */
 export const selectProgress = (s: PlayerState): number =>
   s.duration > 0 ? Math.min(s.currentTime / s.duration, 1) : 0;
+
+export const selectAnalyser = (s: PlayerState): AnalyserNode | null => s.analyserNode;

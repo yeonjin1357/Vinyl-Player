@@ -110,6 +110,7 @@ export function usePlayer(audioRef: RefObject<HTMLAudioElement | null>): UsePlay
         const { isMuted: m, volume: v } = usePlayerStore.getState();
         engine.setGain(m ? 0 : v);
         engineRef.current = engine;
+        usePlayerStore.setState({ analyserNode: engine.analyser }); // publish for the visualizer
         if (import.meta.env.DEV) {
           (window as unknown as { __lpEngine?: AudioEngine }).__lpEngine = engine;
         }

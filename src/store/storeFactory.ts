@@ -18,6 +18,10 @@ export interface PlayerState {
   shuffle: boolean;
   repeat: RepeatMode;
 
+  /** Graph AnalyserNode, published by usePlayer on first play. Stable ref —
+   *  NOT per-frame data, NOT persisted. Consumed by the visualizer. */
+  analyserNode: AnalyserNode | null;
+
   // ---- ui / prefs ----
   view: View;
   selectedAlbumId: string | null;
@@ -73,6 +77,7 @@ const initialState: PlayerState = {
   isMuted: false,
   shuffle: false,
   repeat: 'off',
+  analyserNode: null,
   view: 'player',
   selectedAlbumId: null,
   theme: 'dark-neon',

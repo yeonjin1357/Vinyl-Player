@@ -1,27 +1,36 @@
-import clsx from 'clsx';
+import { useRef } from 'react';
 import { AlbumCover } from '@/components/AlbumCover';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { selectCurrentAlbum } from '@/store/selectors';
 import { usePlayerStore } from '@/store/usePlayerStore';
+import { useVinylSpin } from '../hooks/useVinylSpin';
 import { Tonearm } from './Tonearm';
+import { Visualizer } from './Visualizer';
 
-/** The spinning LP: black vinyl + grooves + album-art center label + tonearm.
- *  M1 uses a CSS spin (gated by isPlaying + reduced-motion); M3 swaps in GSAP. */
+/** The spinning LP: radial spectrum ring + black vinyl + grooves + album-art
+ *  center label + tonearm. M3: GSAP accumulating-rotation tween so pause/resume
+ *  keeps the exact angle; reactive radial visualizer behind the disc. */
 export function TurntableDisc() {
   const album = usePlayerStore(selectCurrentAlbum);
   const isPlaying = usePlayerStore((s) => s.isPlaying);
   const reduced = usePrefersReducedMotion();
-  const spinning = isPlaying && !reduced;
+
+  const discRef = useRef<HTMLDivElement>(null);
+  useVinylSpin(discRef, isPlaying && !reduced);
 
   return (
     <div className="relative aspect-square w-full max-w-sm sm:max-w-md">
-      {/* vinyl base */}
-      <div className="absolute inset-0 rounded-full bg-[var(--vinyl)] shadow-card" />
+      {/* radial spectrum ring — decorative, behind the vinyl */}
+      <Visualizer className="absolute -inset-[18%] z-0" />
 
-      {/* spinning grooves + center label */}
+      {/* vinyl base — never rotates (shadow stays put) */}
+      <div className="absolute inset-0 z-10 rounded-full bg-[var(--vinyl)] shadow-card" />
+
+      {/* spinning grooves + center label — GSAP rotates THIS node */}
       <div
+        ref={discRef}
         aria-hidden="true"
-        className={clsx('absolute inset-0 rounded-full', spinning && 'animate-spin-vinyl')}
+        className="absolute inset-0 z-10 rounded-full will-change-transform"
       >
         <div className="absolute inset-[4%] rounded-full border border-white/[0.05]" />
         <div className="absolute inset-[12%] rounded-full border border-white/[0.05]" />
