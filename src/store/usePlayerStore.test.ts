@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { createStore } from 'zustand/vanilla';
 import { createPlayerState, shuffleInPlace } from './storeFactory';
-import { selectProgress, selectUpNext } from './selectors';
+import { selectProgress, selectQueueTracks } from './selectors';
 import { usePlayerStore } from './usePlayerStore';
 import { getTrackById } from '@/data/music';
 
@@ -289,11 +289,11 @@ describe('shuffleInPlace', () => {
 });
 
 describe('selectors', () => {
-  it('selectUpNext returns tracks after the current position', () => {
+  it('selectQueueTracks returns the full queue regardless of position', () => {
     st().playAlbum('a1');
-    expect(selectUpNext(st()).map((t) => t.id)).toEqual(['t2', 't3']);
-    st().playTrackAt(2);
-    expect(selectUpNext(st())).toEqual([]);
+    expect(selectQueueTracks(st()).map((t) => t.id)).toEqual(['t1', 't2', 't3']);
+    st().playTrackAt(2); // on the last track
+    expect(selectQueueTracks(st()).map((t) => t.id)).toEqual(['t1', 't2', 't3']);
   });
   it('selectProgress is guarded and clamped', () => {
     expect(selectProgress({ ...st(), currentTime: 0, duration: 0 })).toBe(0);

@@ -10,7 +10,7 @@ import { Controls } from './components/Controls';
 import { ProgressBar } from './components/ProgressBar';
 import { TrackInfo } from './components/TrackInfo';
 import { TurntableDisc } from './components/TurntableDisc';
-import { UpNextQueue } from './components/UpNextQueue';
+import { TrackList } from './components/TrackList';
 import { VolumeControl } from './components/VolumeControl';
 
 export function PlayerView() {
@@ -74,7 +74,7 @@ export function PlayerView() {
         </div>
       </div>
 
-      <UpNextQueue />
+      <TrackList />
     </motion.main>
   );
 }

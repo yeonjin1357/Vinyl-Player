@@ -16,12 +16,9 @@ export const selectCurrentAlbum = (s: PlayerState): Album | undefined => {
   return track ? getAlbumById(track.albumId) : undefined;
 };
 
-/** Tracks after the current position in the live queue (for "Up Next"). */
-export const selectUpNext = (s: PlayerState): Track[] =>
-  s.queue
-    .slice(s.queueIndex + 1)
-    .map(getTrackById)
-    .filter((t): t is Track => t != null);
+/** All tracks in the current queue (the playing album), in play order. */
+export const selectQueueTracks = (s: PlayerState): Track[] =>
+  s.queue.map(getTrackById).filter((t): t is Track => t != null);
 
 /** Progress fraction 0..1, guarded against zero/over-run. */
 export const selectProgress = (s: PlayerState): number =>

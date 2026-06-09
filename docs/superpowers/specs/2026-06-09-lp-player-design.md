@@ -77,7 +77,7 @@ App  (hidden <audio>, usePlayer, useMediaKeyboard)
      └─ PlayerView (injects --accent)
          ├─ TurntableDisc (GSAP spin, cover = layoutId target) → Tonearm
          ├─ Visualizer (canvas) · TrackInfo (aria-live) · ProgressBar
-         ├─ Controls (prev/play/next/shuffle/repeat) · VolumeControl · UpNextQueue
+         ├─ Controls (prev/play/next/shuffle/repeat) · VolumeControl · TrackList (full album list, current highlighted)
 ```
 
 Shared presentational: `ThemeToggle`, `LanguageToggle`, `IconButton`, `Slider` (one accessible range used by progress + volume).

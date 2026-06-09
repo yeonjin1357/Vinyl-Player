@@ -3,6 +3,22 @@
  * reduced-motion backstop below cannot neutralize them; those are gated in JS via
  * usePrefersReducedMotion. This file keeps only the global CSS backstop. */
 
+/* "Now playing" equalizer bars (TrackList current row). Frozen by the
+ * reduced-motion backstop below, and only applied while audio is playing. */
+@keyframes eq {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.eq-bar {
+  animation: eq 0.9s ease-in-out infinite;
+}
+
 /* Global backstop: when the user prefers reduced motion, neutralize all CSS
  * animations/transitions. Component-level gates (usePrefersReducedMotion) handle
  * the JS-driven cases (GSAP spin, canvas visualizer, Motion tonearm). */
