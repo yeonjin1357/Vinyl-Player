@@ -7,10 +7,7 @@ One app, two fully distinct visual identities you can flip live:
 - **Dark Neon** — near-black canvas, magenta/cyan glow, sharp edges, bold display type.
 - **Light Minimal** — warm cream, soft shadows, rounded forms, quiet elegance.
 
-> 🚧 **Status:** scaffolded (M0). Core player, audio engine, visualizer, theming, library, and i18n are in progress — see the [roadmap](#roadmap).
-
-<!-- TODO(M6): add a hero screenshot / GIF of both themes and a live demo link -->
-<!-- 🔗 Live demo: <vercel-url> -->
+> ✅ **Status:** complete (M0–M6). 🔗 **Live demo:** https://yeonjin1357.github.io/Vinyl-Player/
 
 ## Features
 
@@ -46,20 +43,23 @@ pnpm dev          # http://localhost:5173
 
 ## Deployment
 
-- **Vercel** (default): import the repo; `vercel.json` configures the build and SPA rewrite.
-- **GitHub Pages**: build with `DEPLOY_TARGET=gh-pages pnpm build` (sets Vite `base` to `/lpRecord/`).
+Deployed to **GitHub Pages** via GitHub Actions (`.github/workflows/deploy.yml`): every push to `main` builds with `DEPLOY_TARGET=gh-pages` (Vite `base` = `/Vinyl-Player/`) and publishes to Pages.
+
+**One-time setup:** repo **Settings → Pages → Build and deployment → Source: _GitHub Actions_**. After that, pushes auto-deploy to https://yeonjin1357.github.io/Vinyl-Player/.
+
+Alternatively, **Vercel**: import the repo (auto-detects Vite, serves from root); `vercel.json` provides the build command + SPA rewrite.
 
 ## Roadmap
 
-| Milestone | Scope                                               |
-| --------- | --------------------------------------------------- |
-| ✅ M0     | Scaffold, tooling, theme token bridge, project docs |
-| M1        | Core player UI + Zustand store (mock audio)         |
-| M2        | Web Audio engine — real playback                    |
-| M3        | Visualizer + GSAP vinyl spin + tonearm              |
-| M4        | Dual-theme system, live toggle                      |
-| M5        | Library grid + shared-element transition            |
-| M6        | i18n, accessibility, real assets, polish, deploy    |
+| Milestone | Scope                                                    |
+| --------- | -------------------------------------------------------- |
+| ✅ M0     | Scaffold, tooling, theme token bridge, project docs      |
+| ✅ M1     | Core player UI + Zustand store                           |
+| ✅ M2     | Web Audio engine — real playback                         |
+| ✅ M3     | Visualizer + GSAP vinyl spin + tonearm                   |
+| ✅ M4     | Dual-theme system, live toggle                           |
+| ✅ M5     | Library grid + shared-element transition                 |
+| ✅ M6     | i18n (EN/KO), accessibility, polish, GitHub Pages deploy |
 
 ## Credits
 

@@ -1,6 +1,8 @@
 import { useRef } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { usePlayer } from '@/hooks/usePlayer';
+import { useMediaKeyboard } from '@/hooks/useMediaKeyboard';
+import { useLanguage } from '@/i18n/useLanguage';
 import { LibraryView } from '@/features/library/LibraryView';
 import { PlayerView } from '@/features/player/PlayerView';
 import { usePlayerStore } from '@/store/usePlayerStore';
@@ -12,6 +14,8 @@ export default function App() {
   const audioRef = useRef<HTMLAudioElement>(null);
   usePlayer(audioRef);
   useTheme();
+  useLanguage(); // store.language -> i18next + <html lang>
+  useMediaKeyboard(); // global media keyboard shortcuts
 
   const view = usePlayerStore((s) => s.view);
 

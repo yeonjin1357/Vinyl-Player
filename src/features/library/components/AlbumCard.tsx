@@ -1,4 +1,5 @@
 import { motion, type Variants } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 import type { Album } from '@/types/music';
 import { AlbumCover } from '@/components/AlbumCover';
 import { usePlayerStore } from '@/store/usePlayerStore';
@@ -14,6 +15,7 @@ interface AlbumCardProps {
 }
 
 export function AlbumCard({ album, reduced }: AlbumCardProps) {
+  const { t } = useTranslation();
   const playAlbum = usePlayerStore((s) => s.playAlbum);
   const trackCount = album.trackIds.length;
 
@@ -28,7 +30,7 @@ export function AlbumCard({ album, reduced }: AlbumCardProps) {
         <div className="relative aspect-square w-full">
           <AlbumCover
             cover={album.cover}
-            alt={`${album.title} by ${album.artist}`}
+            alt={t('a11y.coverAlt', { title: album.title, artist: album.artist })}
             layoutId={reduced ? undefined : `cover-${album.id}`}
             className="absolute inset-0 rounded-card shadow-card transition-shadow group-hover:shadow-[0_0_28px_var(--accent)]"
           />
@@ -37,7 +39,7 @@ export function AlbumCard({ album, reduced }: AlbumCardProps) {
           <span className="block truncate font-semibold">{album.title}</span>
           <span className="block truncate text-sm text-muted">{album.artist}</span>
           <span className="mt-0.5 block text-xs text-muted">
-            {trackCount} {trackCount === 1 ? 'track' : 'tracks'}
+            {t('library.tracks', { count: trackCount })}
           </span>
         </div>
       </motion.button>

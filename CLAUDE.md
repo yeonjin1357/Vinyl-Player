@@ -91,11 +91,10 @@ public/{audio,covers,locales} # bundled assets + runtime i18n JSON
 - Audio must be **same-origin** (bundled in `public/`) with `crossorigin="anonymous"`, or the analyser silently returns zeros (CORS taint).
 - Drive **volume through the `GainNode`**, not `audioEl.volume`, so it matches the analysed signal.
 - **Never push per-frame visualizer data into React state** — read the analyser inside the `requestAnimationFrame` loop and draw straight to canvas; cancel the rAF on unmount.
-- Set Vite **`base`** correctly per deploy target (root for Vercel, `/lpRecord/` for GitHub Pages).
+- Set Vite **`base`** correctly per deploy target (root for Vercel, `/Vinyl-Player/` for GitHub Pages via `DEPLOY_TARGET=gh-pages`).
 
 ## Roadmap status
 
-- **M0 — Scaffold + docs: ✅ done.** Buildable skeleton, Tailwind v4 token bridge, lint/typecheck/test/build all green.
-- M1 core player (mock audio) · M2 audio engine · M3 visualizer + vinyl/tonearm · M4 theming · M5 library + transition · M6 i18n/a11y/polish + deploy — pending.
+**✅ Complete (M0–M6).** Core player + Zustand store · real Web Audio engine · radial visualizer + GSAP vinyl spin + tonearm · dual-theme live toggle · library grid + shared-element transition · EN/KO i18n · keyboard/ARIA a11y · GitHub Pages deploy (CI in `.github/workflows/deploy.yml`). The "Up Next" panel is now a full album track list with the current track highlighted.
 
 See the design spec for the per-milestone deliverables and verification steps.

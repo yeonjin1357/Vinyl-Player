@@ -1,16 +1,12 @@
 import { AnimatePresence, motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 import { IconButton } from '@/components/IconButton';
 import { MoonIcon, SunIcon } from '@/components/icons';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { usePlayerStore } from '@/store/usePlayerStore';
 
-// Shows the icon of the theme you'll switch TO. M6 i18n: swap for t('a11y.toLight'/'a11y.toDark').
-const LABEL = {
-  'dark-neon': 'Switch to light theme',
-  'light-minimal': 'Switch to dark theme',
-} as const;
-
 export function ThemeToggle() {
+  const { t } = useTranslation();
   const theme = usePlayerStore((s) => s.theme);
   const toggleTheme = usePlayerStore((s) => s.toggleTheme);
   const reduced = usePrefersReducedMotion();
@@ -18,7 +14,12 @@ export function ThemeToggle() {
   const Icon = isDark ? SunIcon : MoonIcon;
 
   return (
-    <IconButton label={LABEL[theme]} onClick={toggleTheme} variant="ghost" size="sm">
+    <IconButton
+      label={t(isDark ? 'theme.toLight' : 'theme.toDark')}
+      onClick={toggleTheme}
+      variant="ghost"
+      size="sm"
+    >
       {reduced ? (
         <Icon size={18} />
       ) : (

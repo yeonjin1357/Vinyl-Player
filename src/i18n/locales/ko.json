@@ -1,0 +1,37 @@
+{
+  "common": {
+    "play": "재생",
+    "pause": "일시정지",
+    "next": "다음 곡",
+    "previous": "이전 곡",
+    "shuffle": "셔플",
+    "repeat": "반복",
+    "repeatOne": "한 곡 반복",
+    "volume": "볼륨",
+    "mute": "음소거",
+    "unmute": "음소거 해제",
+    "seek": "탐색"
+  },
+  "player": {
+    "playing": "재생 중"
+  },
+  "library": {
+    "title": "라이브러리",
+    "tracksHeading": "트랙",
+    "tracks_other": "{{count}}곡"
+  },
+  "theme": {
+    "toLight": "라이트 테마로 전환",
+    "toDark": "다크 테마로 전환"
+  },
+  "a11y": {
+    "toggleLanguage": "언어 전환",
+    "backToLibrary": "라이브러리로 돌아가기",
+    "albumLibrary": "앨범 라이브러리",
+    "tracksList": "트랙 목록",
+    "playerRegion": "음악 플레이어",
+    "coverAlt": "{{artist}}의 {{title}}",
+    "volumePercent": "{{percent}} 퍼센트",
+    "seekPosition": "{{duration}} 중 {{current}}"
+  }
+}

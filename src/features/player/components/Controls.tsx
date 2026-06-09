@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { IconButton } from '@/components/IconButton';
 import {
   NextIcon,
@@ -11,6 +12,7 @@ import {
 import { usePlayerStore } from '@/store/usePlayerStore';
 
 export function Controls() {
+  const { t } = useTranslation();
   const isPlaying = usePlayerStore((s) => s.isPlaying);
   const shuffle = usePlayerStore((s) => s.shuffle);
   const repeat = usePlayerStore((s) => s.repeat);
@@ -23,7 +25,7 @@ export function Controls() {
   return (
     <div className="flex items-center gap-1 sm:gap-2">
       <IconButton
-        label="Shuffle"
+        label={t('common.shuffle')}
         active={shuffle}
         pressed={shuffle}
         onClick={toggleShuffle}
@@ -31,11 +33,11 @@ export function Controls() {
       >
         <ShuffleIcon size={18} />
       </IconButton>
-      <IconButton label="Previous" onClick={prev}>
+      <IconButton label={t('common.previous')} onClick={prev}>
         <PrevIcon size={22} />
       </IconButton>
       <IconButton
-        label={isPlaying ? 'Pause' : 'Play'}
+        label={t(isPlaying ? 'common.pause' : 'common.play')}
         pressed={isPlaying}
         onClick={togglePlay}
         variant="primary"
@@ -43,11 +45,11 @@ export function Controls() {
       >
         {isPlaying ? <PauseIcon size={26} /> : <PlayIcon size={26} />}
       </IconButton>
-      <IconButton label="Next" onClick={next}>
+      <IconButton label={t('common.next')} onClick={next}>
         <NextIcon size={22} />
       </IconButton>
       <IconButton
-        label={repeat === 'one' ? 'Repeat one' : 'Repeat'}
+        label={t(repeat === 'one' ? 'common.repeatOne' : 'common.repeat')}
         active={repeat !== 'off'}
         onClick={cycleRepeat}
         size="sm"

@@ -1,5 +1,6 @@
 import { vi } from 'vitest';
 import '@testing-library/jest-dom/vitest';
+import '@/i18n/config'; // init i18next so components using useTranslation render real strings
 
 // jsdom doesn't implement matchMedia; usePrefersReducedMotion needs it.
 if (!window.matchMedia) {

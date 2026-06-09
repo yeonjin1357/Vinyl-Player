@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { useTranslation } from 'react-i18next';
 import { useShallow } from 'zustand/react/shallow';
 import { formatTime } from '@/lib/audio/formatTime';
 import { selectQueueTracks } from '@/store/selectors';
@@ -24,8 +25,9 @@ function NowPlayingBars({ animate }: { animate: boolean }) {
 }
 
 /** The current album's full track list. The playing track is highlighted; any row
- *  is clickable to jump to it. (Replaces the old "Up Next" which hid past tracks.) */
+ *  is clickable to jump to it. */
 export function TrackList() {
+  const { t } = useTranslation();
   const tracks = usePlayerStore(useShallow(selectQueueTracks));
   const currentTrackId = usePlayerStore((s) => s.currentTrackId);
   const isPlaying = usePlayerStore((s) => s.isPlaying);
@@ -34,8 +36,10 @@ export function TrackList() {
   if (tracks.length === 0) return null;
 
   return (
-    <section aria-label="Tracks">
-      <h2 className="mb-3 text-xs font-semibold tracking-[0.3em] text-muted uppercase">Tracks</h2>
+    <section aria-label={t('a11y.tracksList')}>
+      <h2 className="mb-3 text-xs font-semibold tracking-[0.3em] text-muted uppercase">
+        {t('library.tracksHeading')}
+      </h2>
       <ul className="flex flex-col">
         {tracks.map((track, i) => {
           const current = track.id === currentTrackId;

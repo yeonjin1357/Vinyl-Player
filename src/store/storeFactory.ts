@@ -1,6 +1,7 @@
 import type { StateCreator } from 'zustand';
 import type { Language, RepeatMode, Theme, View } from '@/types/player';
 import { getAlbumById, getTrackById } from '@/data/music';
+import { detectLanguage } from '@/i18n/detectLanguage';
 
 export interface PlayerState {
   // ---- playback (display) ----
@@ -93,7 +94,7 @@ const initialState: PlayerState = {
   view: 'library',
   selectedAlbumId: null,
   theme: initialTheme(),
-  language: 'en',
+  language: detectLanguage(),
 };
 
 export const createPlayerState: StateCreator<PlayerStore> = (set, get) => {

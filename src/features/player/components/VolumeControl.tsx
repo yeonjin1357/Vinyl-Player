@@ -1,9 +1,11 @@
+import { useTranslation } from 'react-i18next';
 import { IconButton } from '@/components/IconButton';
 import { VolumeIcon, VolumeMuteIcon } from '@/components/icons';
 import { Slider } from '@/components/Slider';
 import { usePlayerStore } from '@/store/usePlayerStore';
 
 export function VolumeControl() {
+  const { t } = useTranslation();
   const volume = usePlayerStore((s) => s.volume);
   const isMuted = usePlayerStore((s) => s.isMuted);
   const setVolume = usePlayerStore((s) => s.setVolume);
@@ -14,7 +16,7 @@ export function VolumeControl() {
   return (
     <div className="flex items-center gap-2">
       <IconButton
-        label={isMuted ? 'Unmute' : 'Mute'}
+        label={t(isMuted ? 'common.unmute' : 'common.mute')}
         pressed={isMuted}
         onClick={toggleMute}
         size="sm"
@@ -27,8 +29,8 @@ export function VolumeControl() {
         max={1}
         step={0.01}
         onChange={setVolume}
-        ariaLabel="Volume"
-        ariaValueText={`${Math.round(effective * 100)} percent`}
+        ariaLabel={t('common.volume')}
+        ariaValueText={t('a11y.volumePercent', { percent: Math.round(effective * 100) })}
       />
     </div>
   );

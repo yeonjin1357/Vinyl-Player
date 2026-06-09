@@ -1,0 +1,38 @@
+{
+  "common": {
+    "play": "Play",
+    "pause": "Pause",
+    "next": "Next",
+    "previous": "Previous",
+    "shuffle": "Shuffle",
+    "repeat": "Repeat",
+    "repeatOne": "Repeat one",
+    "volume": "Volume",
+    "mute": "Mute",
+    "unmute": "Unmute",
+    "seek": "Seek"
+  },
+  "player": {
+    "playing": "Playing"
+  },
+  "library": {
+    "title": "Library",
+    "tracksHeading": "Tracks",
+    "tracks_one": "{{count}} track",
+    "tracks_other": "{{count}} tracks"
+  },
+  "theme": {
+    "toLight": "Switch to light theme",
+    "toDark": "Switch to dark theme"
+  },
+  "a11y": {
+    "toggleLanguage": "Switch language",
+    "backToLibrary": "Back to library",
+    "albumLibrary": "Album library",
+    "tracksList": "Tracks",
+    "playerRegion": "Music player",
+    "coverAlt": "{{title}} by {{artist}}",
+    "volumePercent": "{{percent}} percent",
+    "seekPosition": "{{current}} of {{duration}}"
+  }
+}

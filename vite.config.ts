@@ -6,7 +6,7 @@ import svgr from 'vite-plugin-svgr';
 
 // `base` differs per deploy target. Vercel (default) serves from root.
 // GitHub Pages serves from a subpath: build with DEPLOY_TARGET=gh-pages.
-const base = process.env.DEPLOY_TARGET === 'gh-pages' ? '/lpRecord/' : '/';
+const base = process.env.DEPLOY_TARGET === 'gh-pages' ? '/Vinyl-Player/' : '/';
 
 export default defineConfig({
   base,

@@ -1,7 +1,9 @@
 import type { CSSProperties } from 'react';
 import { motion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
 import { IconButton } from '@/components/IconButton';
 import { BackIcon } from '@/components/icons';
+import { LanguageToggle } from '@/components/LanguageToggle';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { selectCurrentAlbum } from '@/store/selectors';
@@ -9,11 +11,12 @@ import { usePlayerStore } from '@/store/usePlayerStore';
 import { Controls } from './components/Controls';
 import { ProgressBar } from './components/ProgressBar';
 import { TrackInfo } from './components/TrackInfo';
-import { TurntableDisc } from './components/TurntableDisc';
 import { TrackList } from './components/TrackList';
+import { TurntableDisc } from './components/TurntableDisc';
 import { VolumeControl } from './components/VolumeControl';
 
 export function PlayerView() {
+  const { t } = useTranslation();
   const album = usePlayerStore(selectCurrentAlbum);
   const isPlaying = usePlayerStore((s) => s.isPlaying);
   const theme = usePlayerStore((s) => s.theme);
@@ -28,33 +31,36 @@ export function PlayerView() {
   return (
     <motion.main
       style={accentStyle}
+      role="region"
+      aria-label={t('a11y.playerRegion')}
       initial={reduced ? false : { opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={reduced ? { opacity: 1 } : { opacity: 0 }}
       transition={{ duration: 0.3 }}
       className="mx-auto flex min-h-dvh max-w-6xl flex-col gap-10 px-6 py-8 sm:px-10"
     >
-      <header className="flex items-center justify-between">
+      <header className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
           <IconButton
-            label="Back to library"
+            label={t('a11y.backToLibrary')}
             onClick={() => setView('library')}
             variant="ghost"
             size="sm"
           >
             <BackIcon size={18} />
           </IconButton>
-          <div className="font-display text-xl font-extrabold tracking-tight">
+          <div className="font-display text-xl font-extrabold tracking-tight whitespace-nowrap">
             VINYL<span className="text-accent"> PLAYER</span>
           </div>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {isPlaying && (
-            <span className="flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-bold tracking-widest text-white uppercase">
+            <span className="hidden items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-bold tracking-widest text-white uppercase sm:flex">
               <span className="h-2 w-2 animate-pulse rounded-full bg-white" />
-              Playing
+              {t('player.playing')}
             </span>
           )}
+          <LanguageToggle />
           <ThemeToggle />
         </div>
       </header>

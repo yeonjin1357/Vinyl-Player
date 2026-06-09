@@ -34,7 +34,7 @@ export function TurntableDisc() {
   useVinylSpin(discRef, isPlaying && settled && !reduced);
 
   return (
-    <div className="relative aspect-square w-full max-w-sm sm:max-w-md">
+    <div className="relative aspect-square w-full max-w-[min(28rem,68vw)]">
       {/* radial spectrum ring — decorative, behind the vinyl */}
       <Visualizer className="absolute -inset-[18%] z-0" />
 
