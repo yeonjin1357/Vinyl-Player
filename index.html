@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vinyl.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="LP Record Player — a dual-theme vinyl music player. Frontend portfolio piece." />
+    <meta name="color-scheme" content="light dark" />
+    <title>LP Record Player</title>
+
+    <!-- Fonts: Space Grotesk (dark-neon display), Poppins (light-minimal display), Pretendard (body + KO) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+
+    <!-- Theme flash prevention: apply data-theme before first paint. -->
+    <!-- Reads the Zustand-persisted store (key "lp-player"), falls back to prefers-color-scheme. -->
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('lp-player');
+          var theme = raw ? (JSON.parse(raw).state || {}).theme : null;
+          if (theme !== 'dark-neon' && theme !== 'light-minimal') {
+            theme = window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light-minimal'
+              : 'dark-neon';
+          }
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark-neon');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

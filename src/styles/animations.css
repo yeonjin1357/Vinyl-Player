@@ -1,0 +1,30 @@
+/* Keyframes + motion helpers. Heavy/continuous motion is driven by GSAP/Motion
+ * in components; this file holds CSS-only helpers and the global reduced-motion
+ * kill-switch backstop. */
+
+@keyframes lp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* CSS teaser spin (M0 placeholder). The real, pausable vinyl spin is a GSAP
+ * timeline (see features/player). */
+.animate-spin-vinyl {
+  animation: lp-spin 5s linear infinite;
+  will-change: transform;
+}
+
+/* Global backstop: when the user prefers reduced motion, neutralize all
+ * animations/transitions. Component-level gates (usePrefersReducedMotion) handle
+ * the nuanced cases; this guarantees nothing spins/flies regardless. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

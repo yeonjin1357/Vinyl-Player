@@ -1,0 +1,41 @@
+/*
+ * Design tokens — runtime CSS variables, switched by [data-theme] on <html>.
+ * These are bridged into Tailwind utilities via `@theme inline` in globals.css
+ * (e.g. --bg -> --color-bg -> the `bg-bg` utility). Components consume the
+ * Tailwind utilities; never hardcode hex values in components.
+ */
+
+:root,
+[data-theme='light-minimal'] {
+  --bg: #faf8f4;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --muted: #6b6b6b;
+  --accent: #2b2b2b;
+  --accent-2: #b89b74;
+  --border: #e7e1d8;
+
+  --ff-display: 'Poppins', 'Pretendard', system-ui, sans-serif;
+  --ff-body: 'Pretendard', system-ui, sans-serif;
+
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  --glow: none;
+}
+
+[data-theme='dark-neon'] {
+  --bg: #07070d;
+  --surface: #12121f;
+  --text: #f5f5ff;
+  --muted: #9a9ab5;
+  --accent: #ff006e;
+  --accent-2: #00e5ff;
+  --border: #23233a;
+
+  --ff-display: 'Space Grotesk', 'Pretendard', system-ui, sans-serif;
+  --ff-body: 'Pretendard', system-ui, sans-serif;
+
+  --radius: 8px;
+  --shadow: 0 0 30px rgba(255, 0, 110, 0.35);
+  --glow: 0 0 18px var(--accent);
+}

@@ -1,0 +1,29 @@
+{
+  "common": {
+    "play": "재생",
+    "pause": "일시정지",
+    "next": "다음 곡",
+    "previous": "이전 곡",
+    "volume": "볼륨",
+    "mute": "음소거",
+    "unmute": "음소거 해제"
+  },
+  "player": {
+    "upNext": "다음 트랙",
+    "nowPlaying": "재생 중",
+    "shuffle": "셔플",
+    "repeat": "반복",
+    "repeatOne": "한 곡 반복",
+    "progress": "탐색"
+  },
+  "library": {
+    "title": "라이브러리",
+    "tracks_other": "{{count}}곡",
+    "backToLibrary": "라이브러리로"
+  },
+  "a11y": {
+    "toggleTheme": "테마 전환",
+    "toggleLanguage": "언어 전환",
+    "playerRegion": "음악 플레이어"
+  }
+}
