@@ -261,11 +261,12 @@ describe('volume & mute', () => {
 
 describe('seek', () => {
   it('clamps to [0, duration]', () => {
-    st().playAlbum('a1'); // duration 14
+    st().playAlbum('a1');
+    const d = st().duration; // first track's metadata duration
     st().seek(5);
     expect(st().currentTime).toBe(5);
-    st().seek(999);
-    expect(st().currentTime).toBe(14);
+    st().seek(d + 999);
+    expect(st().currentTime).toBe(d);
     st().seek(-5);
     expect(st().currentTime).toBe(0);
   });

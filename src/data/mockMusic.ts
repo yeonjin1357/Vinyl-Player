@@ -1,11 +1,17 @@
 import type { MusicData } from '@/types/music';
 
 /**
- * M1 placeholder catalog. No real audio — the mock player only reads `duration`.
- * `cover: 'gradient:c1,c2'` is a sentinel parsed by AlbumCover into a CSS gradient
- * (no image files needed). Durations are short (8–20s) so track-end / queue
- * behavior is easy to exercise during manual QA. Replaced by real assets in M6.
+ * M2 catalog backed by real bundled audio (SoundHelix — free to use, no attribution
+ * required; see CREDITS.md). `src` is stored RELATIVE and resolved against
+ * import.meta.env.BASE_URL in usePlayer, so it works on both Vercel ("/") and
+ * GitHub Pages ("/lpRecord/"). `duration` is an estimate (192 kbps file size);
+ * the real value is confirmed at runtime via `loadedmetadata`.
+ *
+ * Five audio files are reused across the catalog (consecutive tracks within an
+ * album differ). Album covers stay gradient sentinels — real cover art is M6.
  */
+const ATTRIBUTION = 'SoundHelix — free to use (soundhelix.com)';
+
 export const mockMusic: MusicData = {
   albums: [
     {
@@ -51,99 +57,99 @@ export const mockMusic: MusicData = {
       title: 'Midnight Coast',
       artist: 'VHS Dreams',
       albumId: 'a1',
-      src: '',
-      duration: 14,
-      attribution: 'mock',
+      src: 'audio/soundhelix-1.mp3',
+      duration: 373,
+      attribution: ATTRIBUTION,
     },
     {
       id: 't2',
       title: 'Chrome Hearts',
       artist: 'VHS Dreams',
       albumId: 'a1',
-      src: '',
-      duration: 11,
-      attribution: 'mock',
+      src: 'audio/soundhelix-2.mp3',
+      duration: 426,
+      attribution: ATTRIBUTION,
     },
     {
       id: 't3',
       title: 'After Hours',
       artist: 'VHS Dreams',
       albumId: 'a1',
-      src: '',
-      duration: 16,
-      attribution: 'mock',
+      src: 'audio/soundhelix-3.mp3',
+      duration: 344,
+      attribution: ATTRIBUTION,
     },
     {
       id: 't4',
       title: 'Ocean Drive',
       artist: 'Lo-Fi Coast',
       albumId: 'a2',
-      src: '',
-      duration: 12,
-      attribution: 'mock',
+      src: 'audio/soundhelix-4.mp3',
+      duration: 302,
+      attribution: ATTRIBUTION,
     },
     {
       id: 't5',
       title: 'Palm Shadows',
       artist: 'Lo-Fi Coast',
       albumId: 'a2',
-      src: '',
-      duration: 18,
-      attribution: 'mock',
+      src: 'audio/soundhelix-5.mp3',
+      duration: 354,
+      attribution: ATTRIBUTION,
     },
     {
       id: 't6',
       title: 'Slow Tide',
       artist: 'Lo-Fi Coast',
       albumId: 'a2',
-      src: '',
-      duration: 10,
-      attribution: 'mock',
+      src: 'audio/soundhelix-1.mp3',
+      duration: 373,
+      attribution: ATTRIBUTION,
     },
     {
       id: 't7',
       title: 'Golden Hour',
       artist: 'Lo-Fi Coast',
       albumId: 'a2',
-      src: '',
-      duration: 15,
-      attribution: 'mock',
+      src: 'audio/soundhelix-2.mp3',
+      duration: 426,
+      attribution: ATTRIBUTION,
     },
     {
       id: 't8',
       title: 'Paper Moon',
       artist: 'Aria Vale',
       albumId: 'a3',
-      src: '',
-      duration: 13,
-      attribution: 'mock',
+      src: 'audio/soundhelix-3.mp3',
+      duration: 344,
+      attribution: ATTRIBUTION,
     },
     {
       id: 't9',
       title: 'Velvet',
       artist: 'Aria Vale',
       albumId: 'a3',
-      src: '',
-      duration: 9,
-      attribution: 'mock',
+      src: 'audio/soundhelix-4.mp3',
+      duration: 302,
+      attribution: ATTRIBUTION,
     },
     {
       id: 't10',
       title: 'Lanterns',
       artist: 'Aria Vale',
       albumId: 'a3',
-      src: '',
-      duration: 17,
-      attribution: 'mock',
+      src: 'audio/soundhelix-5.mp3',
+      duration: 354,
+      attribution: ATTRIBUTION,
     },
     {
       id: 't11',
       title: 'One Take',
       artist: 'Mono',
       albumId: 'a4',
-      src: '',
-      duration: 12,
-      attribution: 'mock',
+      src: 'audio/soundhelix-1.mp3',
+      duration: 373,
+      attribution: ATTRIBUTION,
     },
   ],
 };
