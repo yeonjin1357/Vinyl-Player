@@ -37,3 +37,6 @@ Thumbs.db
 
 # vite
 .vite
+
+# playwright mcp artifacts
+.playwright-mcp/
