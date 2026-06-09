@@ -122,3 +122,9 @@ export const MoonIcon = (p: IconProps) => (
     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
   </Stroke>
 );
+
+export const BackIcon = (p: IconProps) => (
+  <Stroke {...p}>
+    <polyline points="15 18 9 12 15 6" />
+  </Stroke>
+);

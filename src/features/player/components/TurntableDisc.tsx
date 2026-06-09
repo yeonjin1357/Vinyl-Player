@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AlbumCover } from '@/components/AlbumCover';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { selectCurrentAlbum } from '@/store/selectors';
@@ -7,23 +7,38 @@ import { useVinylSpin } from '../hooks/useVinylSpin';
 import { Tonearm } from './Tonearm';
 import { Visualizer } from './Visualizer';
 
-/** The spinning LP: radial spectrum ring + black vinyl + grooves + album-art
- *  center label + tonearm. M3: GSAP accumulating-rotation tween so pause/resume
- *  keeps the exact angle; reactive radial visualizer behind the disc. */
+/** Let the grid→disc shared-layout cover settle before the platter spins up, so
+ *  GSAP's rotate() doesn't fight Motion's layout morph. */
+const MORPH_MS = 500;
+
+/** The spinning LP: radial spectrum ring + vinyl + grooves + album-art center
+ *  label (shared-layout target) + tonearm. */
 export function TurntableDisc() {
   const album = usePlayerStore(selectCurrentAlbum);
   const isPlaying = usePlayerStore((s) => s.isPlaying);
   const reduced = usePrefersReducedMotion();
 
+  // Hold the platter still until the entry morph settles (reduced motion → now).
+  const [settled, setSettled] = useState(reduced);
+  useEffect(() => {
+    if (reduced) {
+      setSettled(true);
+      return;
+    }
+    setSettled(false);
+    const t = setTimeout(() => setSettled(true), MORPH_MS);
+    return () => clearTimeout(t);
+  }, [reduced]);
+
   const discRef = useRef<HTMLDivElement>(null);
-  useVinylSpin(discRef, isPlaying && !reduced);
+  useVinylSpin(discRef, isPlaying && settled && !reduced);
 
   return (
     <div className="relative aspect-square w-full max-w-sm sm:max-w-md">
       {/* radial spectrum ring — decorative, behind the vinyl */}
       <Visualizer className="absolute -inset-[18%] z-0" />
 
-      {/* vinyl base — never rotates (shadow stays put) */}
+      {/* vinyl base — never rotates */}
       <div className="absolute inset-0 z-10 rounded-full bg-[var(--vinyl)] shadow-card" />
 
       {/* spinning grooves + center label — GSAP rotates THIS node */}
@@ -40,6 +55,7 @@ export function TurntableDisc() {
           <AlbumCover
             cover={album.cover}
             alt={`${album.title} album cover`}
+            layoutId={reduced ? undefined : `cover-${album.id}`}
             className="absolute inset-[34%] rounded-full ring-4 ring-black/30"
           />
         )}

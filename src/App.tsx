@@ -1,33 +1,31 @@
-import { useEffect, useRef } from 'react';
-import { music } from '@/data/music';
+import { useRef } from 'react';
+import { AnimatePresence } from 'motion/react';
 import { usePlayer } from '@/hooks/usePlayer';
+import { LibraryView } from '@/features/library/LibraryView';
 import { PlayerView } from '@/features/player/PlayerView';
 import { usePlayerStore } from '@/store/usePlayerStore';
 import { useTheme } from '@/theme/useTheme';
 
 export default function App() {
-  // The hidden <audio> is owned by React (declarative crossOrigin, DOM-resident,
-  // StrictMode-safe) and driven imperatively by usePlayer.
+  // The hidden <audio> + engine + theme live OUTSIDE AnimatePresence so they never
+  // unmount across view changes (playback and the Web Audio graph must persist).
   const audioRef = useRef<HTMLAudioElement>(null);
   usePlayer(audioRef);
-  useTheme(); // applies store.theme -> <html data-theme>
+  useTheme();
 
-  const currentTrackId = usePlayerStore((s) => s.currentTrackId);
-  const playAlbum = usePlayerStore((s) => s.playAlbum);
-
-  // Load the first album (paused) so the player has content on first paint.
-  useEffect(() => {
-    if (currentTrackId == null && music.albums.length > 0) {
-      playAlbum(music.albums[0].id, undefined, false);
-    }
-  }, [currentTrackId, playAlbum]);
+  const view = usePlayerStore((s) => s.view);
 
   return (
     <>
-      {/* crossOrigin="anonymous" + same-origin audio keeps the analyser un-tainted (M3). */}
+      {/* crossOrigin="anonymous" + same-origin audio keeps the analyser un-tainted. */}
       {/* eslint-disable-next-line jsx-a11y/media-has-caption -- music player; captions N/A */}
       <audio ref={audioRef} hidden crossOrigin="anonymous" preload="metadata" />
-      <PlayerView />
+
+      {/* popLayout (not "wait") so the source + target share-layout covers coexist
+          for the grid↔disc morph; non-shared content crossfades. */}
+      <AnimatePresence mode="popLayout" initial={false}>
+        {view === 'library' ? <LibraryView key="library" /> : <PlayerView key="player" />}
+      </AnimatePresence>
     </>
   );
 }

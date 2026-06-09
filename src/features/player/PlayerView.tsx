@@ -1,5 +1,9 @@
 import type { CSSProperties } from 'react';
+import { motion } from 'motion/react';
+import { IconButton } from '@/components/IconButton';
+import { BackIcon } from '@/components/icons';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { selectCurrentAlbum } from '@/store/selectors';
 import { usePlayerStore } from '@/store/usePlayerStore';
 import { Controls } from './components/Controls';
@@ -13,6 +17,8 @@ export function PlayerView() {
   const album = usePlayerStore(selectCurrentAlbum);
   const isPlaying = usePlayerStore((s) => s.isPlaying);
   const theme = usePlayerStore((s) => s.theme);
+  const setView = usePlayerStore((s) => s.setView);
+  const reduced = usePrefersReducedMotion();
 
   // Per-album accent only in dark-neon; light-minimal stays a quiet monochrome
   // (the theme's charcoal --accent), so the two themes feel genuinely distinct.
@@ -20,13 +26,27 @@ export function PlayerView() {
     album && theme === 'dark-neon' ? ({ '--accent': album.accent } as CSSProperties) : undefined;
 
   return (
-    <main
+    <motion.main
       style={accentStyle}
+      initial={reduced ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={reduced ? { opacity: 1 } : { opacity: 0 }}
+      transition={{ duration: 0.3 }}
       className="mx-auto flex min-h-dvh max-w-6xl flex-col gap-10 px-6 py-8 sm:px-10"
     >
       <header className="flex items-center justify-between">
-        <div className="font-display text-xl font-extrabold tracking-tight">
-          VINYL<span className="text-accent"> PLAYER</span>
+        <div className="flex items-center gap-3">
+          <IconButton
+            label="Back to library"
+            onClick={() => setView('library')}
+            variant="ghost"
+            size="sm"
+          >
+            <BackIcon size={18} />
+          </IconButton>
+          <div className="font-display text-xl font-extrabold tracking-tight">
+            VINYL<span className="text-accent"> PLAYER</span>
+          </div>
         </div>
         <div className="flex items-center gap-3">
           {isPlaying && (
@@ -55,6 +75,6 @@ export function PlayerView() {
       </div>
 
       <UpNextQueue />
-    </main>
+    </motion.main>
   );
 }

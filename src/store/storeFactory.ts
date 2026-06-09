@@ -90,7 +90,7 @@ const initialState: PlayerState = {
   shuffle: false,
   repeat: 'off',
   analyserNode: null,
-  view: 'player',
+  view: 'library',
   selectedAlbumId: null,
   theme: initialTheme(),
   language: 'en',
