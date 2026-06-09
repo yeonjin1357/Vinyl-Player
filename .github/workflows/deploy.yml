@@ -33,6 +33,12 @@ jobs:
           node-version: 22
           cache: pnpm
 
+      # Enables Pages on first run (build_type=workflow) so deploy-pages won't 404.
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
