@@ -22,13 +22,16 @@ export function Visualizer({ className }: VisualizerProps) {
   const album = usePlayerStore(selectCurrentAlbum);
   const theme = usePlayerStore((s) => s.theme);
   const reduced = usePrefersReducedMotion();
+  const isDark = theme === 'dark-neon';
 
   useAudioVisualizer({
     canvasRef,
     analyser,
     enabled: isPlaying && analyser != null && !reduced,
-    accent: album?.accent ?? '#ff006e',
-    glow: theme === 'dark-neon',
+    // dark: per-album accent + glow; light: quiet charcoal ring (matches the
+    // light-minimal --accent token), no glow.
+    accent: isDark ? (album?.accent ?? '#ff006e') : '#2b2b2b',
+    glow: isDark,
   });
 
   return (

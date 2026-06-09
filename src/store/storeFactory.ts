@@ -65,6 +65,18 @@ export function shuffleInPlace<T>(arr: T[], rng: () => number = Math.random): T[
   return arr;
 }
 
+/** First-paint theme: adopt the value the FOUC script already wrote to
+ *  <html data-theme> (persisted → else prefers-color-scheme) so the store's first
+ *  render matches the painted DOM (no flash). Persist rehydrate overrides on
+ *  return visits and agrees (same localStorage). jsdom/SSR → fallback. */
+function initialTheme(): Theme {
+  if (typeof document !== 'undefined') {
+    const t = document.documentElement.dataset.theme;
+    if (t === 'dark-neon' || t === 'light-minimal') return t;
+  }
+  return 'dark-neon';
+}
+
 const initialState: PlayerState = {
   currentTrackId: null,
   queue: [],
@@ -80,7 +92,7 @@ const initialState: PlayerState = {
   analyserNode: null,
   view: 'player',
   selectedAlbumId: null,
-  theme: 'dark-neon',
+  theme: initialTheme(),
   language: 'en',
 };
 

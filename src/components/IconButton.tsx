@@ -47,7 +47,7 @@ export function IconButton({
         'inline-grid place-items-center rounded-full outline-none transition-colors focus-visible:ring-2 focus-visible:ring-accent',
         sizeMap[size],
         variant === 'primary'
-          ? 'bg-accent text-white shadow-[0_0_22px_var(--accent)]'
+          ? 'bg-accent text-white shadow-[var(--glow)]'
           : active
             ? 'text-accent'
             : 'text-muted hover:bg-surface hover:text-text',

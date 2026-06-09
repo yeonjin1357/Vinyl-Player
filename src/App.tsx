@@ -3,12 +3,14 @@ import { music } from '@/data/music';
 import { usePlayer } from '@/hooks/usePlayer';
 import { PlayerView } from '@/features/player/PlayerView';
 import { usePlayerStore } from '@/store/usePlayerStore';
+import { useTheme } from '@/theme/useTheme';
 
 export default function App() {
   // The hidden <audio> is owned by React (declarative crossOrigin, DOM-resident,
   // StrictMode-safe) and driven imperatively by usePlayer.
   const audioRef = useRef<HTMLAudioElement>(null);
   usePlayer(audioRef);
+  useTheme(); // applies store.theme -> <html data-theme>
 
   const currentTrackId = usePlayerStore((s) => s.currentTrackId);
   const playAlbum = usePlayerStore((s) => s.playAlbum);

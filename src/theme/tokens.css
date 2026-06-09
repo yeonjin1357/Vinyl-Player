@@ -39,5 +39,5 @@
 
   --radius: 8px;
   --shadow: 0 0 30px rgba(255, 0, 110, 0.35);
-  --glow: 0 0 18px var(--accent);
+  --glow: 0 0 22px var(--accent);
 }

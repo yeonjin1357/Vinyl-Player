@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { selectCurrentAlbum } from '@/store/selectors';
 import { usePlayerStore } from '@/store/usePlayerStore';
 import { Controls } from './components/Controls';
@@ -11,10 +12,12 @@ import { VolumeControl } from './components/VolumeControl';
 export function PlayerView() {
   const album = usePlayerStore(selectCurrentAlbum);
   const isPlaying = usePlayerStore((s) => s.isPlaying);
+  const theme = usePlayerStore((s) => s.theme);
 
-  // Per-album accent: overrides --accent for the whole player subtree so the
-  // disc glow, badges and controls match the cover.
-  const accentStyle = album ? ({ '--accent': album.accent } as CSSProperties) : undefined;
+  // Per-album accent only in dark-neon; light-minimal stays a quiet monochrome
+  // (the theme's charcoal --accent), so the two themes feel genuinely distinct.
+  const accentStyle =
+    album && theme === 'dark-neon' ? ({ '--accent': album.accent } as CSSProperties) : undefined;
 
   return (
     <main
@@ -25,12 +28,15 @@ export function PlayerView() {
         <div className="font-display text-xl font-extrabold tracking-tight">
           VINYL<span className="text-accent"> PLAYER</span>
         </div>
-        {isPlaying && (
-          <span className="flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-bold tracking-widest text-white uppercase">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-white" />
-            Playing
-          </span>
-        )}
+        <div className="flex items-center gap-3">
+          {isPlaying && (
+            <span className="flex items-center gap-2 rounded-full bg-accent px-3 py-1 text-xs font-bold tracking-widest text-white uppercase">
+              <span className="h-2 w-2 animate-pulse rounded-full bg-white" />
+              Playing
+            </span>
+          )}
+          <ThemeToggle />
+        </div>
       </header>
 
       <div className="grid flex-1 items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
