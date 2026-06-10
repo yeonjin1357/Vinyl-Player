@@ -2,6 +2,9 @@
 
 # 🎧 LP Record Player
 
+<img width="1890" height="987" alt="image" src="https://github.com/user-attachments/assets/493f73a5-cd04-4dcb-a8b6-9dc5e3c63b9c" />
+
+
 A vinyl music player for the web that I built as a frontend portfolio piece — the goal was less "another music app" and more a small playground for design and animation craft.
 
 It ships **two completely different visual identities** that you can flip between live, mid-playback:
