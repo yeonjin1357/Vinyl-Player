@@ -2,6 +2,9 @@
 
 # 🎧 LP Record Player
 
+<img width="1890" height="987" alt="image" src="https://github.com/user-attachments/assets/0982aa43-7875-45c2-8be7-ffeaeb7a6bf8" />
+
+
 프론트엔드 포트폴리오로 만든 웹 바이닐 뮤직 플레이어입니다. "음악 앱 하나 더"라기보다는, 디자인과 애니메이션을 마음껏 다듬어 본 작은 놀이터에 가깝습니다.
 
 재생 중에도 실시간으로 전환할 수 있는 **완전히 다른 두 가지 비주얼 아이덴티티**를 담았습니다:
