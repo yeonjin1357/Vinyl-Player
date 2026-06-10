@@ -1,12 +1,18 @@
 # Credits & Licenses
 
-All bundled media is royalty-free and used in compliance with its source license. This file is the authoritative attribution record; some sources (e.g. Incompetech, Bensound) **require** the credit lines below.
+This file is the authoritative attribution record for bundled media. The remaining **dummy** albums use royalty-free SoundHelix audio; **real albums** (added via the `public/audio/<Artist - Album>/` folder convention) use commercial recordings.
 
-> The music below is **placeholder demo audio** (M2): SoundHelix tracks, which are free to use for any purpose with no attribution required. A curated soundtrack replaces these in M6.
+> ⚠️ **Copyright notice.** This is a non-commercial **frontend portfolio demo**. Real albums (e.g. the Arctic Monkeys record below) are **copyrighted commercial recordings and cover art**, included here only to demonstrate the player with realistic content. They are **not** royalty-free; hosting them publicly is the repository owner's responsibility. To keep the public deploy clean, replace them with royalty-free audio or remove the folders before publishing.
 
-## Music
+## Real albums (copyrighted — demo use)
 
-All current audio is **SoundHelix** (https://www.soundhelix.com) — algorithmically generated music, free to use for any purpose, no attribution required. Bundled in `public/audio/` and reused across the demo catalog (`src/data/mockMusic.ts`).
+| Album (`public/audio/<Artist - Album>/`)                         | Rights holder                         | Note                                        |
+| ---------------------------------------------------------------- | ------------------------------------- | ------------------------------------------- |
+| Arctic Monkeys — _Whatever People Say I Am, That's What I'm Not_ | Arctic Monkeys / Domino Recording Co. | © the respective owners; demo content only. |
+
+## Music (dummy albums)
+
+The remaining gradient-cover dummy albums use **SoundHelix** (https://www.soundhelix.com) — algorithmically generated music, free to use for any purpose, no attribution required. Bundled as `public/audio/soundhelix-*.mp3` and referenced by the dummy catalog (`src/data/mockMusic.ts`).
 
 | File (`public/audio/…`) | Source            | License                              |
 | ----------------------- | ----------------- | ------------------------------------ |
@@ -26,11 +32,8 @@ Note: in-app track/album titles (e.g. "Neon Drift", "Midnight Coast") are fictio
 
 ## Cover art
 
-| File (`public/covers/…`) | Source | License | Attribution required? |
-| ------------------------ | ------ | ------- | --------------------- |
-| _tbd_                    | _tbd_  | _tbd_   | _tbd_                 |
-
-**Candidate sources:** Unsplash / Pexels (free license, attribution appreciated), Picsum (placeholder), or abstract/AI-generated art. Target ~6 square WebP covers that read well as a vinyl center label.
+- **Dummy albums** use CSS `gradient:` sentinels (no image files) — see `src/data/mockMusic.ts`.
+- **Real albums** bundle their own `cover.<webp|jpg|png>` inside `public/audio/<Artist - Album>/`. These are the **original commercial cover artworks** (e.g. the Arctic Monkeys sleeve) and are **copyrighted** — see the notice above.
 
 ## Fonts
 

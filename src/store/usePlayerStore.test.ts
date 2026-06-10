@@ -28,24 +28,24 @@ const st = () => store.getState();
 
 describe('playAlbum', () => {
   it('loads an album in natural order and plays', () => {
-    st().playAlbum('a1');
-    expect(st().currentTrackId).toBe('t1');
-    expect(st().queue).toEqual(['t1', 't2', 't3']);
+    st().playAlbum('a3');
+    expect(st().currentTrackId).toBe('t8');
+    expect(st().queue).toEqual(['t8', 't9', 't10']);
     expect(st().queueIndex).toBe(0);
     expect(st().isPlaying).toBe(true);
     expect(st().currentTime).toBe(0);
     expect(st().view).toBe('player');
-    expect(st().selectedAlbumId).toBe('a1');
-    expect(st().duration).toBe(getTrackById('t1')!.duration);
+    expect(st().selectedAlbumId).toBe('a3');
+    expect(st().duration).toBe(getTrackById('t8')!.duration);
   });
   it('starts at a given track', () => {
-    st().playAlbum('a1', 't2');
-    expect(st().currentTrackId).toBe('t2');
+    st().playAlbum('a3', 't9');
+    expect(st().currentTrackId).toBe('t9');
     expect(st().queueIndex).toBe(1);
   });
   it('falls back to the first track for an unknown startId', () => {
-    st().playAlbum('a1', 'nope');
-    expect(st().currentTrackId).toBe('t1');
+    st().playAlbum('a3', 'nope');
+    expect(st().currentTrackId).toBe('t8');
     expect(st().queueIndex).toBe(0);
   });
   it('is a no-op for an unknown album', () => {
@@ -54,39 +54,39 @@ describe('playAlbum', () => {
     expect(st().queue).toEqual([]);
   });
   it('can load without autoplay', () => {
-    st().playAlbum('a1', undefined, false);
+    st().playAlbum('a3', undefined, false);
     expect(st().isPlaying).toBe(false);
-    expect(st().currentTrackId).toBe('t1');
+    expect(st().currentTrackId).toBe('t8');
   });
   it('produces a permutation with the start track at the head when shuffled', () => {
     st().toggleShuffle(); // flips flag (empty queue)
-    st().playAlbum('a1');
+    st().playAlbum('a3');
     expect(st().queue).toHaveLength(3);
-    expect([...st().queue].sort()).toEqual(['t1', 't2', 't3']);
-    expect(st().queue[0]).toBe('t1');
+    expect([...st().queue].sort()).toEqual(['t8', 't9', 't10'].sort());
+    expect(st().queue[0]).toBe('t8');
     expect(st().queueIndex).toBe(0);
   });
 });
 
 describe('playTrackAt', () => {
   it('jumps within the queue', () => {
-    st().playAlbum('a1');
+    st().playAlbum('a3');
     st().playTrackAt(2);
-    expect(st().currentTrackId).toBe('t3');
+    expect(st().currentTrackId).toBe('t10');
     expect(st().currentTime).toBe(0);
     expect(st().isPlaying).toBe(true);
   });
   it('guards out-of-range indices', () => {
-    st().playAlbum('a1');
+    st().playAlbum('a3');
     st().playTrackAt(99);
     st().playTrackAt(-1);
-    expect(st().currentTrackId).toBe('t1');
+    expect(st().currentTrackId).toBe('t8');
   });
 });
 
 describe('togglePlay', () => {
   it('toggles when a track is loaded', () => {
-    st().playAlbum('a1', undefined, false);
+    st().playAlbum('a3', undefined, false);
     expect(st().isPlaying).toBe(false);
     st().togglePlay();
     expect(st().isPlaying).toBe(true);
@@ -101,24 +101,24 @@ describe('togglePlay', () => {
 
 describe('next', () => {
   it('advances mid-queue', () => {
-    st().playAlbum('a1');
+    st().playAlbum('a3');
     st().next();
-    expect(st().currentTrackId).toBe('t2');
+    expect(st().currentTrackId).toBe('t9');
     expect(st().queueIndex).toBe(1);
     expect(st().currentTime).toBe(0);
   });
   it('clamps at the last track when repeat is off', () => {
-    st().playAlbum('a1', 't3');
+    st().playAlbum('a3', 't10');
     st().next();
     expect(st().queueIndex).toBe(2);
-    expect(st().currentTrackId).toBe('t3');
+    expect(st().currentTrackId).toBe('t10');
   });
   it('wraps to the first track when repeat is all', () => {
-    st().playAlbum('a1', 't3');
+    st().playAlbum('a3', 't10');
     st().cycleRepeat(); // off -> all
     st().next();
     expect(st().queueIndex).toBe(0);
-    expect(st().currentTrackId).toBe('t1');
+    expect(st().currentTrackId).toBe('t8');
   });
   it('handles a single-track album', () => {
     st().playAlbum('a4');
@@ -133,64 +133,64 @@ describe('next', () => {
 
 describe('prev', () => {
   it('restarts the current track when past 3s', () => {
-    st().playAlbum('a1', 't2');
+    st().playAlbum('a3', 't9');
     st().seek(5);
     st().prev();
-    expect(st().currentTrackId).toBe('t2');
+    expect(st().currentTrackId).toBe('t9');
     expect(st().queueIndex).toBe(1);
     expect(st().currentTime).toBe(0);
   });
   it('goes to the previous track when within 3s', () => {
-    st().playAlbum('a1', 't2');
+    st().playAlbum('a3', 't9');
     st().seek(2);
     st().prev();
-    expect(st().currentTrackId).toBe('t1');
+    expect(st().currentTrackId).toBe('t8');
     expect(st().queueIndex).toBe(0);
   });
   it('clamps at the first track (repeat off)', () => {
-    st().playAlbum('a1');
+    st().playAlbum('a3');
     st().seek(1);
     st().prev();
     expect(st().queueIndex).toBe(0);
     expect(st().currentTime).toBe(0);
   });
   it('wraps to the last track (repeat all)', () => {
-    st().playAlbum('a1');
+    st().playAlbum('a3');
     st().cycleRepeat(); // all
     st().seek(1);
     st().prev();
     expect(st().queueIndex).toBe(2);
-    expect(st().currentTrackId).toBe('t3');
+    expect(st().currentTrackId).toBe('t10');
   });
 });
 
 describe('_handleTrackEnded', () => {
   it('advances to the next track (repeat off)', () => {
-    st().playAlbum('a1');
+    st().playAlbum('a3');
     st()._handleTrackEnded();
-    expect(st().currentTrackId).toBe('t2');
+    expect(st().currentTrackId).toBe('t9');
     expect(st().isPlaying).toBe(true);
   });
   it('stops at the end of the queue (repeat off)', () => {
-    st().playAlbum('a1', 't3');
+    st().playAlbum('a3', 't10');
     st()._handleTrackEnded();
-    expect(st().currentTrackId).toBe('t3');
+    expect(st().currentTrackId).toBe('t10');
     expect(st().isPlaying).toBe(false);
   });
   it('wraps to the first track (repeat all)', () => {
-    st().playAlbum('a1', 't3');
+    st().playAlbum('a3', 't10');
     st().cycleRepeat(); // all
     st()._handleTrackEnded();
-    expect(st().currentTrackId).toBe('t1');
+    expect(st().currentTrackId).toBe('t8');
     expect(st().isPlaying).toBe(true);
   });
   it('replays the same track (repeat one)', () => {
-    st().playAlbum('a1', 't2');
+    st().playAlbum('a3', 't9');
     st().cycleRepeat(); // all
     st().cycleRepeat(); // one
     st().seek(5);
     st()._handleTrackEnded();
-    expect(st().currentTrackId).toBe('t2');
+    expect(st().currentTrackId).toBe('t9');
     expect(st().queueIndex).toBe(1);
     expect(st().currentTime).toBe(0);
     expect(st().isPlaying).toBe(true);
@@ -199,19 +199,19 @@ describe('_handleTrackEnded', () => {
 
 describe('toggleShuffle', () => {
   it('keeps the current track at the head and shuffles the rest', () => {
-    st().playAlbum('a1');
+    st().playAlbum('a3');
     st().toggleShuffle();
     expect(st().shuffle).toBe(true);
-    expect([...st().queue].sort()).toEqual(['t1', 't2', 't3']);
-    expect(st().currentTrackId).toBe('t1');
-    expect(st().queue[st().queueIndex]).toBe('t1');
+    expect([...st().queue].sort()).toEqual(['t8', 't9', 't10'].sort());
+    expect(st().currentTrackId).toBe('t8');
+    expect(st().queue[st().queueIndex]).toBe('t8');
   });
   it('restores natural order when toggled off', () => {
-    st().playAlbum('a1');
+    st().playAlbum('a3');
     st().toggleShuffle();
     st().toggleShuffle();
-    expect(st().queue).toEqual(['t1', 't2', 't3']);
-    expect(st().currentTrackId).toBe('t1');
+    expect(st().queue).toEqual(['t8', 't9', 't10']);
+    expect(st().currentTrackId).toBe('t8');
     expect(st().queueIndex).toBe(0);
   });
   it('just flips the flag with no queue', () => {
@@ -261,7 +261,7 @@ describe('volume & mute', () => {
 
 describe('seek', () => {
   it('clamps to [0, duration]', () => {
-    st().playAlbum('a1');
+    st().playAlbum('a3');
     const d = st().duration; // first track's metadata duration
     st().seek(5);
     expect(st().currentTime).toBe(5);
@@ -290,10 +290,10 @@ describe('shuffleInPlace', () => {
 
 describe('selectors', () => {
   it('selectQueueTracks returns the full queue regardless of position', () => {
-    st().playAlbum('a1');
-    expect(selectQueueTracks(st()).map((t) => t.id)).toEqual(['t1', 't2', 't3']);
+    st().playAlbum('a3');
+    expect(selectQueueTracks(st()).map((t) => t.id)).toEqual(['t8', 't9', 't10']);
     st().playTrackAt(2); // on the last track
-    expect(selectQueueTracks(st()).map((t) => t.id)).toEqual(['t1', 't2', 't3']);
+    expect(selectQueueTracks(st()).map((t) => t.id)).toEqual(['t8', 't9', 't10']);
   });
   it('selectProgress is guarded and clamped', () => {
     expect(selectProgress({ ...st(), currentTime: 0, duration: 0 })).toBe(0);

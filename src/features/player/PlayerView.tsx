@@ -5,6 +5,7 @@ import { IconButton } from '@/components/IconButton';
 import { BackIcon } from '@/components/icons';
 import { LanguageToggle } from '@/components/LanguageToggle';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { useCoverAccent } from '@/hooks/useCoverAccent';
 import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 import { selectCurrentAlbum } from '@/store/selectors';
 import { usePlayerStore } from '@/store/usePlayerStore';
@@ -23,10 +24,12 @@ export function PlayerView() {
   const setView = usePlayerStore((s) => s.setView);
   const reduced = usePrefersReducedMotion();
 
-  // Per-album accent only in dark-neon; light-minimal stays a quiet monochrome
-  // (the theme's charcoal --accent), so the two themes feel genuinely distinct.
+  // Accent extracted from the cover at runtime (falls back to the album's own accent
+  // for gradient dummies). Per-album accent only in dark-neon; light-minimal stays a
+  // quiet monochrome (the theme's charcoal --accent), so the two themes stay distinct.
+  const accent = useCoverAccent(album);
   const accentStyle =
-    album && theme === 'dark-neon' ? ({ '--accent': album.accent } as CSSProperties) : undefined;
+    accent && theme === 'dark-neon' ? ({ '--accent': accent } as CSSProperties) : undefined;
 
   return (
     <motion.main

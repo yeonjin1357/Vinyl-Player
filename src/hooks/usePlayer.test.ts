@@ -34,8 +34,9 @@ function makeAudio(duration = 373) {
 function setup(duration = 373) {
   const el = makeAudio(duration);
   const ref = { current: el };
-  // Known store state: album a1 loaded, paused (isPlaying stays false → no engine path).
-  act(() => usePlayerStore.getState().playAlbum('a1', undefined, false));
+  // Known store state: album a4 (single track t11, duration 373) loaded + paused
+  // (isPlaying stays false → no engine path).
+  act(() => usePlayerStore.getState().playAlbum('a4', undefined, false));
   const view = renderHook(() => usePlayer(ref));
   return { el, ref, ...view };
 }

@@ -2,16 +2,12 @@ import { useCallback, useEffect, useRef } from 'react';
 import type { RefObject } from 'react';
 import { getTrackById } from '@/data/music';
 import { getAudioEngine, type AudioEngine } from '@/lib/audio/AudioEngine';
+import { resolveAssetUrl } from '@/lib/resolveAssetUrl';
 import { usePlayerStore } from '@/store/usePlayerStore';
 
 export interface UsePlayerResult {
   /** The graph's AnalyserNode (for the M3 visualizer). Null until first play attaches the engine. */
   analyser: AnalyserNode | null;
-}
-
-/** Resolve a stored relative src (e.g. "audio/x.mp3") against the deploy base path. */
-function resolveSrc(src: string): string {
-  return `${import.meta.env.BASE_URL}${src.replace(/^\//, '')}`;
 }
 
 /**
@@ -93,7 +89,7 @@ export function usePlayer(audioRef: RefObject<HTMLAudioElement | null>): UsePlay
     const track = getTrackById(currentTrackId);
     if (!track?.src) return;
 
-    el.src = resolveSrc(track.src); // resets currentTime to 0 naturally
+    el.src = resolveAssetUrl(track.src); // resets currentTime to 0 naturally
     el.load();
     if (usePlayerStore.getState().isPlaying) safePlay();
   }, [currentTrackId, audioRef, safePlay]);

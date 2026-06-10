@@ -1,0 +1,126 @@
+{
+  "albums": [
+    {
+      "id": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not",
+      "title": "Whatever People Say I Am, That's What I'm Not",
+      "artist": "Arctic Monkeys",
+      "year": 2006,
+      "accent": "#8a8a8a",
+      "cover": "audio/Arctic Monkeys - Whatever People Say I Am, That's What I'm Not (2006)/cover.webp",
+      "trackIds": [
+        "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-1",
+        "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-2",
+        "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-3",
+        "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-4",
+        "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-5",
+        "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-6",
+        "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-7",
+        "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-8",
+        "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-9",
+        "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-10",
+        "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-11"
+      ]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-1",
+      "title": "The View From The Afternoon",
+      "artist": "Arctic Monkeys",
+      "albumId": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not",
+      "src": "audio/Arctic Monkeys - Whatever People Say I Am, That's What I'm Not (2006)/1.The View From The Afternoon.mp3",
+      "duration": 223,
+      "attribution": "Arctic Monkeys — Whatever People Say I Am, That's What I'm Not"
+    },
+    {
+      "id": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-2",
+      "title": "I Bet You Look Good On The Dancefloor",
+      "artist": "Arctic Monkeys",
+      "albumId": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not",
+      "src": "audio/Arctic Monkeys - Whatever People Say I Am, That's What I'm Not (2006)/2.I Bet You Look Good On The Dancefloor.mp3",
+      "duration": 174,
+      "attribution": "Arctic Monkeys — Whatever People Say I Am, That's What I'm Not"
+    },
+    {
+      "id": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-3",
+      "title": "Fake Tales Of San Francisco",
+      "artist": "Arctic Monkeys",
+      "albumId": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not",
+      "src": "audio/Arctic Monkeys - Whatever People Say I Am, That's What I'm Not (2006)/3.Fake Tales Of San Francisco.mp3",
+      "duration": 178,
+      "attribution": "Arctic Monkeys — Whatever People Say I Am, That's What I'm Not"
+    },
+    {
+      "id": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-4",
+      "title": "Dancing Shoes",
+      "artist": "Arctic Monkeys",
+      "albumId": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not",
+      "src": "audio/Arctic Monkeys - Whatever People Say I Am, That's What I'm Not (2006)/4.Dancing Shoes.mp3",
+      "duration": 141,
+      "attribution": "Arctic Monkeys — Whatever People Say I Am, That's What I'm Not"
+    },
+    {
+      "id": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-5",
+      "title": "You Probably Couldnt See For The Lights But You Were Staring Straight At Me",
+      "artist": "Arctic Monkeys",
+      "albumId": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not",
+      "src": "audio/Arctic Monkeys - Whatever People Say I Am, That's What I'm Not (2006)/5.You Probably Couldnt See For The Lights But You Were Staring Straight At Me.mp3",
+      "duration": 131,
+      "attribution": "Arctic Monkeys — Whatever People Say I Am, That's What I'm Not"
+    },
+    {
+      "id": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-6",
+      "title": "Still Take You Home",
+      "artist": "Arctic Monkeys",
+      "albumId": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not",
+      "src": "audio/Arctic Monkeys - Whatever People Say I Am, That's What I'm Not (2006)/6.Still Take You Home.mp3",
+      "duration": 174,
+      "attribution": "Arctic Monkeys — Whatever People Say I Am, That's What I'm Not"
+    },
+    {
+      "id": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-7",
+      "title": "Riot Van",
+      "artist": "Arctic Monkeys",
+      "albumId": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not",
+      "src": "audio/Arctic Monkeys - Whatever People Say I Am, That's What I'm Not (2006)/7.Riot Van.mp3",
+      "duration": 135,
+      "attribution": "Arctic Monkeys — Whatever People Say I Am, That's What I'm Not"
+    },
+    {
+      "id": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-8",
+      "title": "Red Light Indicates Doors Are Secured",
+      "artist": "Arctic Monkeys",
+      "albumId": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not",
+      "src": "audio/Arctic Monkeys - Whatever People Say I Am, That's What I'm Not (2006)/8.Red Light Indicates Doors Are Secured.mp3",
+      "duration": 144,
+      "attribution": "Arctic Monkeys — Whatever People Say I Am, That's What I'm Not"
+    },
+    {
+      "id": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-9",
+      "title": "Mardy Bum",
+      "artist": "Arctic Monkeys",
+      "albumId": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not",
+      "src": "audio/Arctic Monkeys - Whatever People Say I Am, That's What I'm Not (2006)/9.Mardy Bum.mp3",
+      "duration": 175,
+      "attribution": "Arctic Monkeys — Whatever People Say I Am, That's What I'm Not"
+    },
+    {
+      "id": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-10",
+      "title": "Perhaps Vampires Is A Bit Strong But…",
+      "artist": "Arctic Monkeys",
+      "albumId": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not",
+      "src": "audio/Arctic Monkeys - Whatever People Say I Am, That's What I'm Not (2006)/10.Perhaps Vampires Is A Bit Strong But….mp3",
+      "duration": 269,
+      "attribution": "Arctic Monkeys — Whatever People Say I Am, That's What I'm Not"
+    },
+    {
+      "id": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not-11",
+      "title": "When The Sun Goes Down",
+      "artist": "Arctic Monkeys",
+      "albumId": "arctic-monkeys-whatever-people-say-i-am-thats-what-im-not",
+      "src": "audio/Arctic Monkeys - Whatever People Say I Am, That's What I'm Not (2006)/11.When The Sun Goes Down.mp3",
+      "duration": 202,
+      "attribution": "Arctic Monkeys — Whatever People Say I Am, That's What I'm Not"
+    }
+  ]
+}

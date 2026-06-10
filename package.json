@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "gen:music": "node scripts/generate-catalog.mjs",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "lint": "eslint .",

@@ -20,6 +20,9 @@ export function Visualizer({ className }: VisualizerProps) {
   const analyser = usePlayerStore((s) => s.analyserNode);
   const isPlaying = usePlayerStore((s) => s.isPlaying);
   const album = usePlayerStore(selectCurrentAlbum);
+  // Cover-extracted accent (cached by useCoverAccent) so the canvas matches the UI's
+  // --accent; falls back to the album's static accent (gradient dummies).
+  const coverAccent = usePlayerStore((s) => (album ? s.coverAccents[album.id] : undefined));
   const theme = usePlayerStore((s) => s.theme);
   const reduced = usePrefersReducedMotion();
   const isDark = theme === 'dark-neon';
@@ -30,7 +33,7 @@ export function Visualizer({ className }: VisualizerProps) {
     enabled: isPlaying && analyser != null && !reduced,
     // dark: per-album accent + glow; light: quiet charcoal ring (matches the
     // light-minimal --accent token), no glow.
-    accent: isDark ? (album?.accent ?? '#ff006e') : '#2b2b2b',
+    accent: isDark ? (coverAccent ?? album?.accent ?? '#ff006e') : '#2b2b2b',
     glow: isDark,
   });
 

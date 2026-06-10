@@ -12,6 +12,14 @@ export default tseslint.config(
   tseslint.configs.recommended,
   jsxA11y.flatConfigs.recommended,
   {
+    // Node build scripts (catalog generator) — Node globals, not browser.
+    files: ['scripts/**/*.{js,mjs}'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      globals: globals.node,
+    },
+  },
+  {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2022,

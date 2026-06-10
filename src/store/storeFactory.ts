@@ -23,6 +23,10 @@ export interface PlayerState {
    *  NOT per-frame data, NOT persisted. Consumed by the visualizer. */
   analyserNode: AnalyserNode | null;
 
+  /** albumId → accent hex extracted from the cover image at runtime (image covers
+   *  only; gradient dummies keep their static accent). NOT persisted. */
+  coverAccents: Record<string, string>;
+
   // ---- ui / prefs ----
   view: View;
   selectedAlbumId: string | null;
@@ -53,6 +57,8 @@ export interface PlayerActions {
   _setCurrentTime: (t: number) => void;
   _setDuration: (d: number) => void;
   _handleTrackEnded: () => void;
+  /** Cache a cover-extracted accent (set by the useCoverAccent hook, not UI). */
+  _setCoverAccent: (albumId: string, hex: string) => void;
 }
 
 export type PlayerStore = PlayerState & PlayerActions;
@@ -91,6 +97,7 @@ const initialState: PlayerState = {
   shuffle: false,
   repeat: 'off',
   analyserNode: null,
+  coverAccents: {},
   view: 'library',
   selectedAlbumId: null,
   theme: initialTheme(),
@@ -240,6 +247,11 @@ export const createPlayerState: StateCreator<PlayerStore> = (set, get) => {
     _setCurrentTime: (currentTime) => set({ currentTime }),
     _setDuration: (duration) => {
       if (get().duration !== duration) set({ duration });
+    },
+
+    _setCoverAccent: (albumId, hex) => {
+      if (get().coverAccents[albumId] === hex) return;
+      set((s) => ({ coverAccents: { ...s.coverAccents, [albumId]: hex } }));
     },
 
     // Auto-advance at end of track — the ONLY place repeat 'one' replays.

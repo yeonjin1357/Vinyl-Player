@@ -1,28 +1,17 @@
 import type { MusicData } from '@/types/music';
 
 /**
- * M2 catalog backed by real bundled audio (SoundHelix — free to use, no attribution
- * required; see CREDITS.md). `src` is stored RELATIVE and resolved against
- * import.meta.env.BASE_URL in usePlayer, so it works on both Vercel ("/") and
- * GitHub Pages ("/lpRecord/"). `duration` is an estimate (192 kbps file size);
- * the real value is confirmed at runtime via `loadedmetadata`.
- *
- * Five audio files are reused across the catalog (consecutive tracks within an
- * album differ). Album covers stay gradient sentinels — real cover art is M6.
+ * The remaining gradient-cover DUMMY albums (SoundHelix audio — free to use, no
+ * attribution required; see CREDITS.md). Real albums come from the folder scanner
+ * (`generatedAlbums.json`) and are merged AHEAD of these in `music.ts`; each time a
+ * real album replaces a slot, drop the matching dummy here. `src` is stored RELATIVE
+ * and resolved against import.meta.env.BASE_URL in usePlayer. `duration` is an
+ * estimate; the real value is confirmed at runtime via `loadedmetadata`.
  */
 const ATTRIBUTION = 'SoundHelix — free to use (soundhelix.com)';
 
 export const mockMusic: MusicData = {
   albums: [
-    {
-      id: 'a1',
-      title: 'Neon Drift',
-      artist: 'VHS Dreams',
-      year: 2021,
-      accent: '#ff006e',
-      cover: 'gradient:#ff006e,#7a00ff',
-      trackIds: ['t1', 't2', 't3'],
-    },
     {
       id: 'a2',
       title: 'Cassette Sunset',
@@ -52,33 +41,6 @@ export const mockMusic: MusicData = {
     },
   ],
   tracks: [
-    {
-      id: 't1',
-      title: 'Midnight Coast',
-      artist: 'VHS Dreams',
-      albumId: 'a1',
-      src: 'audio/soundhelix-1.mp3',
-      duration: 373,
-      attribution: ATTRIBUTION,
-    },
-    {
-      id: 't2',
-      title: 'Chrome Hearts',
-      artist: 'VHS Dreams',
-      albumId: 'a1',
-      src: 'audio/soundhelix-2.mp3',
-      duration: 426,
-      attribution: ATTRIBUTION,
-    },
-    {
-      id: 't3',
-      title: 'After Hours',
-      artist: 'VHS Dreams',
-      albumId: 'a1',
-      src: 'audio/soundhelix-3.mp3',
-      duration: 344,
-      attribution: ATTRIBUTION,
-    },
     {
       id: 't4',
       title: 'Ocean Drive',

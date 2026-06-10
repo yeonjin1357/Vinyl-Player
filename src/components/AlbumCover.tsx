@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { motion } from 'motion/react';
+import { resolveAssetUrl } from '@/lib/resolveAssetUrl';
 
 interface AlbumCoverProps {
   /** Either a `gradient:c1,c2` sentinel (M1 mock) or an image URL (M6). */
@@ -40,14 +41,17 @@ export function AlbumCover({ cover, alt, className, layoutId }: AlbumCoverProps)
       />
     );
   }
+  // An <img> is a replaced element: with `position:absolute` + `inset` it does NOT
+  // stretch to the box the way the gradient <div> does, so it overflows and mis-aligns
+  // (e.g. inside the disc's `inset-[34%]` label). Wrap it in the sized box and let the
+  // image fill it with object-cover; the layoutId morph rides on the wrapper.
+  const src = resolveAssetUrl(cover);
+  const img = <img src={src} alt={alt} className="h-full w-full object-cover" />;
   return layoutId ? (
-    <motion.img
-      layoutId={layoutId}
-      src={cover}
-      alt={alt}
-      className={clsx('object-cover', className)}
-    />
+    <motion.div layoutId={layoutId} className={clsx('overflow-hidden', className)}>
+      {img}
+    </motion.div>
   ) : (
-    <img src={cover} alt={alt} className={clsx('object-cover', className)} />
+    <div className={clsx('overflow-hidden', className)}>{img}</div>
   );
 }

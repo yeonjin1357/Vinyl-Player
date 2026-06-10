@@ -11,7 +11,8 @@ One app, two fully distinct visual identities you can flip live:
 
 ## Features
 
-- 🎵 Real audio playback of bundled royalty-free tracks (play/pause/seek/volume/prev/next, shuffle, repeat)
+- 🎵 Real audio playback (play/pause/seek/volume/prev/next, shuffle, repeat) — drop an `Artist - Album (YYYY)` folder into `public/audio/` and run `pnpm gen:music`
+- 🎨 Per-album accent color extracted from the cover art at runtime
 - 📊 **Web Audio API** sound-reactive visualizer that responds to the music
 - 💿 Spinning LP + animated tonearm that lift on pause and resume from the exact angle
 - 🗂️ Library grid → player transition (the album cover flies into the turntable)
@@ -35,6 +36,7 @@ pnpm dev          # http://localhost:5173
 | Command                     | Description                             |
 | --------------------------- | --------------------------------------- |
 | `pnpm dev`                  | Start the dev server                    |
+| `pnpm gen:music`            | Scan `public/audio/` folders → catalog  |
 | `pnpm build`                | Typecheck + production build to `dist/` |
 | `pnpm preview`              | Preview the production build            |
 | `pnpm lint` / `pnpm format` | Lint / format                           |
@@ -63,7 +65,7 @@ Alternatively, **Vercel**: import the repo (auto-detects Vite, serves from root)
 
 ## Credits
 
-Music and cover art are royalty-free — see [`CREDITS.md`](CREDITS.md) for per-asset attribution and licenses.
+Dummy albums use royalty-free SoundHelix audio + gradient covers. Real albums added for the demo (e.g. the Arctic Monkeys record) are **copyrighted commercial recordings** included only to showcase the player — they are not royalty-free. See [`CREDITS.md`](CREDITS.md) for per-asset attribution, licenses, and the copyright notice.
 
 ## License
 
